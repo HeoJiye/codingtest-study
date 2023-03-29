@@ -1,10 +1,10 @@
-//bfs - Ãß°¡ °øºÎ ÇÊ¿ä.
+//bfs - ì¶”ê°€ ê³µë¶€ í•„ìš”.
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class B7562 {	//³ªÀÌÆ®ÀÇ ÀÌµ¿
+public class B7562 {	//ë‚˜ì´íŠ¸ì˜ ì´ë™
 	static int[] dr = {-1, -2, -2, -1, 1, 2, 2, 1};
 	static int[] dc = {-2, -1, 1, 2, 2, 1, -1, -2};
 	
@@ -31,12 +31,12 @@ public class B7562 {	//³ªÀÌÆ®ÀÇ ÀÌµ¿
 	}
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();	//Å×½ºÆ® ÄÉÀÌ½º °³¼ö
-		testCase[] tcs = new testCase[n];	//Å×½ºÆ®ÄÉÀÌ½º ¹è¿­
+		int n = sc.nextInt();	//í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ ê°œìˆ˜
+		testCase[] tcs = new testCase[n];	//í…ŒìŠ¤íŠ¸ì¼€ì´ìŠ¤ ë°°ì—´
 		
 		
 		for(int i=0;i<n;i++) {
-			testCase tc = new testCase();	//ÀÌ°Å ¾ÈÇß´õ´Ï ÀüºÎ ¸¶Áö¸·¿¡ ÀÔ·Â¹ŞÀº°É·Î ÀúÀåµÆ³×..ÀÌ°Å ÀÌÀ¯°¡ ¹¹´õ¶ó
+			testCase tc = new testCase();	//ì´ê±° ì•ˆí–ˆë”ë‹ˆ ì „ë¶€ ë§ˆì§€ë§‰ì— ì…ë ¥ë°›ì€ê±¸ë¡œ ì €ì¥ëë„¤..ì´ê±° ì´ìœ ê°€ ë­ë”ë¼
 			tc.i = sc.nextInt();
 			tc.board = new int[tc.i][tc.i];
 			tc.start.x = sc.nextInt();
@@ -53,7 +53,7 @@ public class B7562 {	//³ªÀÌÆ®ÀÇ ÀÌµ¿
 		}
 		*/
 		
-		//tcº° °á°ú
+		//tcë³„ ê²°ê³¼
 		for(int i=0;i<n;i++) {
 			solution(tcs[i]);
 			point end = tcs[i].end;
@@ -78,7 +78,7 @@ public class B7562 {	//³ªÀÌÆ®ÀÇ ÀÌµ¿
 		tc.board[tc.start.x][tc.start.y] = 0;
 		
 		while(!q.isEmpty()) {
-			point p = q.poll();	//LIFO
+			point p = q.poll();
 			
 			if(p.x == tc.end.x && p.y == tc.end.y) break;
 			
