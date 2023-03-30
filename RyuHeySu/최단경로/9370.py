@@ -15,21 +15,21 @@ def dijkastra(start) :
     q = []
 
     heapq.heappush(q, (0, start))
-    distance[start] = 0
+    distance[start][0] = 0
 
     while q :
         dist, now = heapq.heappop(q) # 제일 짧은 교차로.
 
         # 이미 처리 되어 있음
-        if distance[now] < dist :
+        if distance[now][0] < dist :
             continue
 
         for node in graphs[now] :
             cost = dist + node[1]
 
-            if distance[node[0]] > cost : # 이전 경로보다 현재 경로가 더 짧다면.
-                distance[node[0]] = cost # 갱신
-                lines[node[0]] = now # 다음 경로에 지나간 경로 기입.
+            if distance[node[0]][0] > cost : # 이전 경로보다 현재 경로가 더 짧다면.
+                distance[node[0]][0] = cost # 갱신
+                distance[node[0]][1] = now
                 heapq.heappush(q, (cost, node[0]))
 
 for _ in range(T) :
@@ -39,7 +39,7 @@ for _ in range(T) :
     graphs = [[] for i in range(n + 1)]
     # 경로 기록
     lines = [0] * (n + 1)
-    distance = [INF] * (n + 1)
+    distance = [[INF, i] for i in range(n + 1)]
 
     for _ in range(m) : # 도로 개수
         a, b, d = map(int, input().split())
@@ -51,20 +51,20 @@ for _ in range(T) :
 
     for _ in range(t) : # 후보지 개수
         x = int(input())
+        
+        length, _= distance[x] # 최단 길이
+        parent_node = x
 
-        # 경유지를 통과한 최단거리와 비교한다.
-        index = x
-        former = 0
-        while index != s : # 시작점으로 내려간다.
-            index, former = index, lines[index]
-            print(index, former)
-
-            if (index, former) == (g, h) or (index, former) == (h, g) :
+        while parent_node != s:  
+            next = distance[parent_node][1]       
+            
+            if (parent_node, next) == (g, h) or (next, parent_node) == (g, h) :
                 answer.append(x)
                 break
+            
+            parent_node = next
 
-            index = lines[index]
-        
+        # 경유지를 통과한 최단거리와 비교한다.
     answer.sort()
     print(*answer)
 
